@@ -7,7 +7,7 @@ from app.services import (
         )
 
 
-api = Blueprint("browser", __name__)
+api = Blueprint("api", __name__)
 
 
 @api.get("/healthcheck")

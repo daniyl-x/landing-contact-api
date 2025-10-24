@@ -25,14 +25,8 @@ def post():
     except ValidationError as err:
         return make_response("error", err.message, err.status_code)
 
-    status_code = 200
     if not os.path.exists(OUTPUT_PATH):
         write_csv_header(OUTPUT_PATH, CSV_FIELDS)
-        status_code = 201
     write_csv_row(OUTPUT_PATH, csv_data, CSV_FIELDS)
 
-    return make_response(
-            "success",
-            "Data was successfully saved.",
-            status_code
-            )
+    return make_response("success", "Data was successfully saved.", 200)

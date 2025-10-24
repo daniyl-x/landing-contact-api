@@ -2,6 +2,7 @@ import os
 from flask import Flask
 
 from app.routes.api import api
+from app.routes.browser import browser
 
 
 app = Flask(__name__, instance_relative_config=True)
@@ -17,3 +18,4 @@ app.config["OUTPUT_PATH"] = os.path.join(
 
 
 app.register_blueprint(api, url_prefix="/api")
+app.register_blueprint(browser, url_prefix="/")

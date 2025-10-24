@@ -1,4 +1,5 @@
 import os
+from werkzeug.exceptions import HTTPException
 from flask import Blueprint, request, current_app
 
 from app.services import (
@@ -30,3 +31,13 @@ def post():
     write_csv_row(OUTPUT_PATH, csv_data, CSV_FIELDS)
 
     return make_response("success", "Data was successfully saved.", 200)
+
+
+@api.errorhandler(HTTPException)
+def errorhandler(e):
+    """Return response in JSON for all API HTTP errors"""
+    return make_response(
+            "error",
+            f"{e.code} {e.name}. {e.description}",
+            e.code
+            )
